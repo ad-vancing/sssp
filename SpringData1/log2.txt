@@ -1,0 +1,82 @@
+testSpringData
+查询信息
+
+2018-10-14 20:59:25:INFO main org.springframework.context.support.ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@2ed0fbae: startup date [Sun Oct 14 20:59:25 CST 2018]; root of context hierarchy
+2018-10-14 20:59:25:INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2018-10-14 20:59:25:INFO main org.springframework.context.support.PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [db.properties]
+2018-10-14 20:59:26:INFO main org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-10-14 20:59:26:INFO main org.hibernate.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.2.Final}
+2018-10-14 20:59:26:INFO main org.hibernate.Version - HHH000412: Hibernate Core {4.2.5.Final}
+2018-10-14 20:59:26:INFO main org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2018-10-14 20:59:26:INFO main org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+2018-10-14 20:59:26:INFO main org.hibernate.ejb.Ejb3Configuration - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-10-14 20:59:26:INFO main org.hibernate.service.jdbc.connections.internal.ConnectionProviderInitiator - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2018-10-14 20:59:27:INFO main org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-10-14 20:59:27:INFO main org.hibernate.engine.jdbc.internal.LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2018-10-14 20:59:27:INFO main org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2018-10-14 20:59:27:INFO main org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-14 20:59:27:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2018-10-14 20:59:27:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2018-10-14 20:59:27:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: test.class
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [teacher, class_id, class_name, class_date]
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
+2018-10-14 20:59:28:INFO main org.springframework.context.support.ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@5fa23c: startup date [Sun Oct 14 20:59:28 CST 2018]; root of context hierarchy
+2018-10-14 20:59:28:INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2018-10-14 20:59:28:INFO main org.springframework.context.support.PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [db.properties]
+2018-10-14 20:59:28:INFO main org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-10-14 20:59:28:INFO main org.hibernate.ejb.Ejb3Configuration - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-10-14 20:59:28:INFO main org.hibernate.service.jdbc.connections.internal.ConnectionProviderInitiator - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2018-10-14 20:59:28:INFO main org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-10-14 20:59:28:INFO main org.hibernate.engine.jdbc.internal.LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2018-10-14 20:59:28:INFO main org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2018-10-14 20:59:28:INFO main org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: test.class
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [teacher, class_id, class_name, class_date]
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2018-10-14 20:59:28:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
+2018-10-14 20:59:28:WARN main org.hibernate.ejb.internal.EntityManagerFactoryRegistry - HHH000436: Entity manager factory name (default) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+jdbc:mysql:///test, UserName=root@localhost, MySQL-AB JDBC Driver
+2018-10-14 20:59:28:INFO main org.springframework.context.support.ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7a81065e: startup date [Sun Oct 14 20:59:28 CST 2018]; root of context hierarchy
+2018-10-14 20:59:28:INFO main org.springframework.beans.factory.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [application-context.xml]
+2018-10-14 20:59:29:INFO main org.springframework.context.support.PropertySourcesPlaceholderConfigurer - Loading properties file from class path resource [db.properties]
+2018-10-14 20:59:29:INFO main org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-10-14 20:59:29:INFO main org.hibernate.ejb.Ejb3Configuration - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-10-14 20:59:29:INFO main org.hibernate.service.jdbc.connections.internal.ConnectionProviderInitiator - HHH000130: Instantiating explicit connection provider: org.hibernate.ejb.connection.InjectedDataSourceConnectionProvider
+2018-10-14 20:59:29:INFO main org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-10-14 20:59:29:INFO main org.hibernate.engine.jdbc.internal.LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2018-10-14 20:59:29:INFO main org.hibernate.engine.transaction.internal.TransactionFactoryInitiator - HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+2018-10-14 20:59:29:INFO main org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2018-10-14 20:59:29:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2018-10-14 20:59:29:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000102: Fetching database metadata
+2018-10-14 20:59:29:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000396: Updating schema
+2018-10-14 20:59:29:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000261: Table found: test.class
+2018-10-14 20:59:29:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000037: Columns: [teacher, class_id, class_name, class_date]
+2018-10-14 20:59:29:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000108: Foreign keys: []
+2018-10-14 20:59:29:INFO main org.hibernate.tool.hbm2ddl.TableMetadata - HHH000126: Indexes: [primary]
+2018-10-14 20:59:29:INFO main org.hibernate.tool.hbm2ddl.SchemaUpdate - HHH000232: Schema update complete
+2018-10-14 20:59:29:WARN main org.hibernate.ejb.internal.EntityManagerFactoryRegistry - HHH000436: Entity manager factory name (default) is already registered.  If entity manager will be clustered or passivated, specify a unique value for property 'hibernate.ejb.entitymanager_factory_name'
+com.sun.proxy.$Proxy21
+Hibernate: 
+    select
+        class_0_.class_id as class_id1_0_,
+        class_0_.class_date as class_da2_0_,
+        class_0_.class_name as class_na3_0_,
+        class_0_.teacher as teacher4_0_ 
+    from
+        class class_0_ 
+    where
+        class_0_.class_name=?
+Class_ [className=PC, classId=1, teacher=tom, classDate=2018-10-03 20:22:51.0]

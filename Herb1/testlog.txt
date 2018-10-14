@@ -1,0 +1,65 @@
+test...
+十月 14, 2018 2:40:34 下午 org.hibernate.annotations.common.Version <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {4.0.2.Final}
+十月 14, 2018 2:40:34 下午 org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {4.2.5.Final}
+十月 14, 2018 2:40:34 下午 org.hibernate.cfg.Environment <clinit>
+INFO: HHH000206: hibernate.properties not found
+十月 14, 2018 2:40:34 下午 org.hibernate.cfg.Environment buildBytecodeProvider
+INFO: HHH000021: Bytecode provider name : javassist
+十月 14, 2018 2:40:34 下午 org.hibernate.cfg.Configuration configure
+INFO: HHH000043: Configuring from resource: /hibernate.cfg.xml
+十月 14, 2018 2:40:34 下午 org.hibernate.cfg.Configuration getConfigurationInputStream
+INFO: HHH000040: Configuration resource: /hibernate.cfg.xml
+十月 14, 2018 2:40:34 下午 org.hibernate.internal.util.xml.DTDEntityResolver resolveEntity
+WARN: HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+十月 14, 2018 2:40:34 下午 org.hibernate.cfg.Configuration addResource
+INFO: HHH000221: Reading mappings from resource: org/zywx/Herb1/Student.hbm.xml
+十月 14, 2018 2:40:34 下午 org.hibernate.internal.util.xml.DTDEntityResolver resolveEntity
+WARN: HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+十月 14, 2018 2:40:34 下午 org.hibernate.cfg.Configuration doConfigure
+INFO: HHH000041: Configured SessionFactory: null
+十月 14, 2018 2:40:34 下午 org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+INFO: HHH000402: Using Hibernate built-in connection pool (not for production use!)
+十月 14, 2018 2:40:34 下午 org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+INFO: HHH000115: Hibernate connection pool size: 20
+十月 14, 2018 2:40:34 下午 org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+INFO: HHH000006: Autocommit mode: false
+十月 14, 2018 2:40:34 下午 org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+INFO: HHH000401: using driver [com.mysql.jdbc.Driver] at URL [jdbc:mysql:///test]
+十月 14, 2018 2:40:34 下午 org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+INFO: HHH000046: Connection properties: {user=root, password=****}
+十月 14, 2018 2:40:34 下午 org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+十月 14, 2018 2:40:34 下午 org.hibernate.engine.transaction.internal.TransactionFactoryInitiator initiateService
+INFO: HHH000399: Using default transaction strategy (direct JDBC transactions)
+十月 14, 2018 2:40:34 下午 org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory <init>
+INFO: HHH000397: Using ASTQueryTranslatorFactory
+十月 14, 2018 2:40:35 下午 org.hibernate.tool.hbm2ddl.SchemaUpdate execute
+INFO: HHH000228: Running hbm2ddl schema update
+十月 14, 2018 2:40:35 下午 org.hibernate.tool.hbm2ddl.SchemaUpdate execute
+INFO: HHH000102: Fetching database metadata
+十月 14, 2018 2:40:35 下午 org.hibernate.tool.hbm2ddl.SchemaUpdate execute
+INFO: HHH000396: Updating schema
+十月 14, 2018 2:40:35 下午 org.hibernate.tool.hbm2ddl.TableMetadata <init>
+INFO: HHH000261: Table found: test.student
+十月 14, 2018 2:40:35 下午 org.hibernate.tool.hbm2ddl.TableMetadata <init>
+INFO: HHH000037: Columns: [birthday, major, name, tel, id]
+十月 14, 2018 2:40:35 下午 org.hibernate.tool.hbm2ddl.TableMetadata <init>
+INFO: HHH000108: Foreign keys: []
+十月 14, 2018 2:40:35 下午 org.hibernate.tool.hbm2ddl.TableMetadata <init>
+INFO: HHH000126: Indexes: [primary]
+十月 14, 2018 2:40:35 下午 org.hibernate.tool.hbm2ddl.SchemaUpdate execute
+INFO: HHH000232: Schema update complete
+Hibernate: 
+    select
+        student0_.ID as ID1_0_0_,
+        student0_.NAME as NAME2_0_0_,
+        student0_.MAJOR as MAJOR3_0_0_,
+        student0_.TEL as TEL4_0_0_,
+        student0_.BIRTHDAY as BIRTHDAY5_0_0_ 
+    from
+        STUDENT student0_ 
+    where
+        student0_.ID=?
+Student [id=1, name=tom, major=pc, tel=1300107327, birthday=2018-10-14 14:07:59.0]

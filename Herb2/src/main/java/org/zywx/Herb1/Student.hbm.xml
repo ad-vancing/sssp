@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-14 13:29:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+<!-- 指定类和表的关系映射 -->
+    <class name="org.zywx.Herb1.Student" table="STUDENT" dynamic-insert="true">
+    <!-- 指定类的OID和表主键的关系映射 -->
+        <id name="id" type="int">
+            <column name="ID" />
+            <!-- 指定对象标识符生成器, 负责为 OID 生成唯一标识符
+            native指定主键的生成方式——使用数据库本地方式 ，oracle是序列，mysql自增
+             -->
+            <generator class="native" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="major" type="java.lang.String">
+            <column name="MAJOR" />
+        </property>
+        <property name="tel" type="java.lang.String">
+            <column name="TEL" />
+        </property>
+        <property name="birthday" type="java.util.Date">
+            <column name="BIRTHDAY" />
+        </property>
+    </class>
+</hibernate-mapping>

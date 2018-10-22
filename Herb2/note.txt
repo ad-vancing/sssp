@@ -1,0 +1,50 @@
+1.流行的ORM框架:
+Hibernate:
+非常优秀、成熟的 ORM 框架。
+完成对象的持久化操作
+Hibernate 允许开发者采用面向对象的方式来操作关系数据库。
+消除那些针对特定数据库厂商的 SQL 代码
+myBatis：
+相比 Hibernate 灵活高，运行速度快
+开发速度慢，不支持纯粹的面向对象操作，需熟悉sql语
+  句，并且熟练使用sql语句优化功能 
+TopLink
+OJB
+
+
+2.hibernate项目开发步骤
+1）1. 创建 Hibernate 配置文件cfg.xml；
+2)创建持久化类，即实体类；需要无参构造器
+3）创建对象-关系映射文件，每个实体类对应一个，通过hibernate插件自动生成
+4）通过 Hibernate API 编写访问数据库的代码，7步
+步骤：
+获取 Configuration 对象
+获取 SessionFactory 对象（构造 SessionFactory 很消耗资源，一般情况下一个应用中只初始化一个 SessionFactory 对象。
+）
+ServiceRegistry 对象
+获取 Session（Session 是应用程序与数据库之间交互操作的一个单线程对象，是 Hibernate 运作的中心，所有持久化对象必须在 session 的管理下才可以进行持久化操作。此对象的生命周期很短。Session 对象有一个一级缓存，显式执行 flush 之前，所有的持久层操作的数据都缓存在 session 对象处。相当于 JDBC 中的 Connection。
+）
+打开事务
+用面向对象的方式操作数据库
+关闭事务，关闭 Session
+
+
+关于持久化类：
+提供一个标识属性(identifier property): 通常映射为数据库表的主键字段. 如果没有该属性，一些功能将不起作用，如：Session.saveOrUpdate()
+为类的持久化类字段声明访问方法(get/set): Hibernate对JavaBeans 风格的属性实行持久化。
+使用非 final 类: 在运行时生成代理是 Hibernate 的一个重要的功能. 如果持久化类没有实现任何接口, Hibnernate 使用 CGLIB 生成代理. 如果使用的是 final 类, 则无法生成 CGLIB 代理.
+重写 eqauls 和 hashCode 方法: 如果需要把持久化类的实例放到 Set 中(当需要进行关联映射时), 则应该重写这两个方法
+
+
+关于Configure类
+创建 Configuration 的两种方式
+属性文件（hibernate.properties）:
+Configuration cfg = new Configuration();
+Xml文件（hibernate.cfg.xml）
+Configuration cfg = new Configuration().configure();
+Configuration 的 configure 方法还支持带参数的访问：
+File file = new File(“simpleit.xml”);
+Configuration cfg = new Configuration().configure(file);
+
+
+

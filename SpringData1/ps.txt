@@ -1,8 +1,0 @@
-创建applicationContext.xml时，通过向导选择创建Spring Configuration时，命名空间选beans,context,tx（eclipse没有安装spring插件不会提示）
-之后还要jpa命名空间
-
-
-
-
-
-

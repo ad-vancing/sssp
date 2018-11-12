@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+
+	<description>全局性配置文件</description>
+	
+	<!-- spring与jpa -->
+	<!-- 1.db -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClass}" ></property>
+        <property name="url" value="${jdbc.jdbcUrl}" ></property>
+        <property name="username" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+	
+	     
+	
+	
+	<!-- 2.jpa的EntityManagerFactory -->
+	 <bean id="entityManagerFactory"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" ></property>
+        <property name="jpaVendorAdapter" >
+        	<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
+        </property>
+        <property name="packagesToScan" value="com.cashew.SpringData1"></property>
+        <property name="jpaProperties" >
+        	<props>
+        		<!-- 二级缓存相关 -->
+				<!--  
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+				<prop key="net.sf.ehcache.configurationResourceName">ehcache-hibernate.xml</prop>
+				-->
+				<!-- 生成数据表的列的映射策略-->
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+				<!-- hibernate 基本属性-->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+        	</props>
+       </property>
+    </bean>
+	
+	<!-- 3.事务管理器 -->
+	 <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+	
+	<!-- 4.支持注解的事务 -->
+	 <tx:annotation-driven transaction-manager="transactionManager" />  
+	
+	<!-- spring与SpingData -->
+	<!-- 1.加入jpa的命名空间  xmlns:jpa="http://www.springframework.org/schema/data/jpa"-->
+	<!-- 扫描base-package里Repository Bean(继承了Repository的接口，均为仓库接口类)所在包，放入IOC容器 -->
+	<jpa:repositories base-package="com.cashew.SpringData1" entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="transactionManager"/> 
+   
+
+
+	
+</beans>

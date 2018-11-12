@@ -1,0 +1,17 @@
+EntityManager的api使用
+
+查询获取对象
+find()
+getReference()
+
+persist()
+
+remove()
+
+flush()
+将表的记录与内存对象同步
+同hibernate
+refresh()
+
+
+merge()

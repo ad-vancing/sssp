@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-10-14 13:29:12 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="org.zywx.Herb1">
+	<!-- 指定类和表的关系映射，如果不想写全类名，可以在上方指定包名的方式替代 -->
+	<class name="Student" table="STUDENT" dynamic-insert="true"
+		dynamic-update="true">
+		<!-- 指定类的OID和表主键的关系映射 -->
+		<id name="id" type="int">
+			<column name="ID" />
+			<!-- 指定对象标识符生成器, 负责为 OID 生成唯一标识符 native指定主键的生成方式——使用数据库本地方式 ，oracle是序列，mysql自增 -->
+			<generator class="native" />
+		</id>
+
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<property name="major" type="java.lang.String">
+			<column name="MAJOR" />
+		</property>
+		<property name="tel" type="java.lang.String">
+			<column name="TEL" />
+		</property>
+		<property name="birthday" type="date">
+			<column name="BIRTHDAY" />
+		</property>
+		<!-- 映射派生属性 -->
+		<property name="descript" formula="(SELECT concat(name, ': ', tel) FROM STUDENT n WHERE n.id = id )">
+		</property>
+		<!-- 大对象 -->
+			<!-- longtext、longblob 
+		<property name="selfDesc" type="clob"></property>
+		<property name="image" type="blob"></property>
+			默认是longtext、longblob,若要精确指定数据库的类型，写成如下：-->
+			
+		<property name="selfDesc" >
+			<column name="self_desc" sql-type="mediumtext"></column>
+		</property>
+		<property name="image" type="blob">
+			<column name="image" sql-type="mediumblob"></column>
+		</property>
+	</class>
+</hibernate-mapping>

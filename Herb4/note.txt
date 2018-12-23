@@ -1,0 +1,108 @@
+1.hibernate的配置文件
+1）格式
+.properties（hibernate-release-4.2.4.Fianl/project/etc/hibernate.properties文件参考，不推荐）、.xml
+2）内容
+除了数据库配置信息、hibernate配置信息，还有哪些配置？
+i.数据源c3p0配置
+依赖包：hibernate-release-4.2.4.Fianl/lib/optional/c3p0、或者
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-c3p0</artifactId>
+    <version>4.2.5.Final</version>
+</dependency>
+
+    
+配置项:
+hibernate.c3p0.max_size: 数据库连接池的最大连接数(应用程序有高并发时，连接池里能提供的最大的连接数)
+hibernate.c3p0.min_size: 数据库连接池的最小连接数(应用程序没有任何请求与并发时，连接池里需要保持的连接数)
+hibernate.c3p0.acquire_increment: 当数据库连接池中的连接耗尽时, 同一时刻获取多少个数据库连接(应用程序一次能获取的最大连接数)
+hibernate.c3p0.timeout:   数据库连接池中连接对象在多长时间没有使用过后，就应该被销毁
+hibernate.c3p0.idle_test_period:  表示连接池检测线程多长时间检测一次池内的所有链接对象是否超时. 连接池本身不会把自己从连接池中移除，而是专门有一个线程按照一定的时间间隔来做这件事，这个线程通过比较连接对象最后一次被使用时间和当前时间的时间差来和 timeout 做对比，进而决定是否销毁这个连接对象。 
+hibernate.c3p0.max_statements:  缓存 Statement 对象的数量
+
+ii.其他配置
+hibernate.jdbc.fetch_size：实质是调用 Statement.setFetchSize() 方法设定 JDBC 的 Statement 读取数据的时候每次从数据库中取出的记录条数。
+例如一次查询1万条记录，对于Oracle的JDBC驱动来说，是不会 1 次性把1万条取出来的，而只会取出 fetchSize 条数，当结果集遍历完了这些记录以后，再去数据库取 fetchSize 条数据。因此大大节省了无谓的内存消耗。Fetch Size设的越大，读数据库的次数越少，速度越快；Fetch Size越小，读数据库的次数越多，速度越慢。Oracle数据库的JDBC驱动默认的Fetch Size = 10，是一个保守的设定，根据测试，当Fetch Size=50时，性能会提升1倍之多，当 fetchSize=100，性能还能继续提升20%，Fetch Size继续增大，性能提升的就不显著了。
+并不是所有的数据库都支持Fetch Size特性，例如MySQL就不支持（对batch_size也不支持）
+hibernate.jdbc.batch_size：设定对数据库进行批量删除，批量更新和批量插入的时候的批次大小，类似于设置缓冲区大小的意思。batchSize 越大，批量操作时向数据库发送sql的次数越少，速度就越快。
+测试结果是当Batch Size=0的时候，使用Hibernate对Oracle数据库删除1万条记录需要25秒，Batch Size = 50的时候，删除仅仅需要5秒！Oracle数据库 batchSize=30 的时候比较合适。
+
+2.对象关系映射文件
+1)hibernate-mapping元素 
+属性 package
+
+2)class元素
+属性
+dynamic-insert: 若设置为 true, 表示当保存一个对象时, 会动态生成 insert 语句, insert 语句中仅包含所有取值不为 null 的字段. 默认值为 false
+dynamic-update: 若设置为 true, 表示当更新一个对象时, 会动态生成 update 语句, update 语句中仅包含所有取值需要更新的字段. 默认值为 false
+"动态生成"：
+指，会根据修改内容生成sql语句，比如只修改了name，就只update name，而默认的false会update所有字段
+select-before-update:设置 Hibernate 在更新某个持久化对象之前是否需要先执行一次查询. 默认值为 false
+
+3)id元素--generator元素 设定持久化类设定标识符生成器
+Hibernate 推荐在数据表中使用代理主键, 即不具备业务含义的字段. 代理主键通常为整数类型, 因为整数类型比字符串类型要节省更多的数据库空间（缺点：后台从前台获取时需要转为整型）.
+class 指定使用的标识符生成器全限定类名或其缩写名
+
+Hibernate提供的内置标识符生成器:
+i.increment
+由 Hibernate 以递增的方式为代理主键赋值
+先读取 NEWS 表中的主键的最大值, 而接下来向 NEWS 表中插入记录时, 就在 max(id) 的基础上递增, 增量为 1.
+适用范围:
+由于 increment 生存标识符机制不依赖于底层数据库系统, 因此它适合所有的数据库系统
+但适用于只有单个 Hibernate 应用进程访问同一个数据库的场合【多线程时，可能出现都读取id=1,然后都设置为2导致主键重复】, 在集群环境下不推荐使用它
+OID 必须为 long, int 或 short 类型, 如果把 OID 定义为 byte 类型, 在运行时会抛出异常
+
+ii.identity
+由底层数据库来负责生成标识符, 它要求底层数据库把主键定义为自动增长字段类型
+适用范围:
+由于 identity 生成标识符的机制依赖于底层数据库系统, 因此, 要求底层数据库系统必须支持自动增长字段类型. 支持自动增长字段类型的数据库包括: DB2, Mysql, MSSQLServer, Sybase 等.oracle用不了。
+OID 必须为 long, int 或 short 类型, 如果把 OID 定义为 byte 类型, 在运行时会抛出异常
+
+iii.sequence
+利用底层数据库提供的序列来生成标识符. 
+适用范围:
+由于 sequence 生成标识符的机制依赖于底层数据库系统的序列, 因此, 要求底层数据库系统必须支持序列. 支持序列的数据库包括: DB2, Oracle 等
+OID 必须为 long, int 或 short 类型, 如果把 OID 定义为 byte 类型, 在运行时会抛出异常
+
+iv.hilo
+由 Hibernate 按照一种 high/low 算法*生成标识符, 它从数据库的特定表的字段中获取 high 值.
+Hibernate 在持久化一个 News 对象时, 由 Hibernate 负责生成主键值. hilo 标识符生成器在生成标识符时, 需要读取并修改 HI_TABLE 表中的 NEXT_VALUE 值.
+insert语句里会有id，数据库里会多一个表hibernate_unique_key，用于生成主键值。
+适用范围:
+由于 hilo 生存标识符机制不依赖于底层数据库系统, 因此它适合所有的数据库系统
+OID 必须为 long, int 或 short 类型, 如果把 OID 定义为 byte 类型, 在运行时会抛出异常
+
+v.native（用的多，跨平台）
+native 标识符生成器依据底层数据库对自动生成标识符的支持能力, 来选择使用 identity, sequence 或 hilo 标识符生成器. 
+适用范围:
+由于 native 能根据底层数据库系统的类型, 自动选择合适的标识符生成器, 因此很适合于跨数据库平台开发
+OID 必须为 long, int 或 short 类型, 如果把 OID 定义为 byte 类型, 在运行时会抛出异常
+
+4)property元素
+name:指定该持久化类的属性的名字
+column（也可以写成子节点）:指定与类的属性映射的表的字段名. 如果没有设置该属性, Hibernate 将直接使用类的属性名作为字段名. 
+type:指定 Hibernate 映射类型（全类名或hiber映射类型，详见“Java 类型, Hibernate 映射类型及 SQL 类型之间的对应关系 ”）. Hibernate 映射类型是 Java 类型与 SQL 类型的桥梁. 如果没有为某个属性显式设定映射类型, Hibernate 会运用反射机制先识别出持久化类的特定属性的 Java 类型, 然后自动使用与之对应的默认的 Hibernate 映射类型.
+not-null:若该属性值为 true, 表明不允许为 null, 默认为 false
+access:指定 Hibernate 的默认的属性访问策略。默认值为 property, 即使用 getter, setter 方法来访问属性. 若指定 field, 则 Hibernate 会忽略 getter/setter 方法, 而通过反射访问成员变量
+unique: 设置是否为该属性所映射的数据列添加唯一约束. 
+update:该列的值是否可被修改。为false时，去修改不会报错，但也不会改成功。 
+index: 指定一个字符串的索引名称. 当系统需要 Hibernate 自动建表时, 用于为该属性所映射的数据列创建索引, 从而加快该数据列的查询.
+length: 指定该属性所映射数据列的字段的长度
+scale: 指定该属性所映射数据列的小数位数, 对 double, float, decimal 等类型的数据列有效.
+formula：设置一个 SQL 表达式, Hibernate 将根据它来计算出派生属性的值. 
+派生属性: 并不是持久化类的所有属性都直接和表的字段匹配, 持久化类的有些属性的值必须在运行时通过计算才能得出来, 这种属性称为派生属性
+
+
+
+
+时间、日期的映射
+java.util.Date可以和三种时间类型都能对应，所以设置持久化类的属性类型时，设为该类型
+
+通过type属性来映射到数据库的类型,如：date、time——hibernate映射类型（扁担）
+		<property name="birthday" type="timestamp">
+			<column name="BIRTHDAY" />
+		</property>
+		
+大文本(不常用)
+精确映射，sql-type		
+	
